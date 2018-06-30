@@ -1,0 +1,4 @@
+name: MineGlorySmpResources
+main: com.paperbenni.mineglory.Mineglory
+version: 1.0
+commands:
