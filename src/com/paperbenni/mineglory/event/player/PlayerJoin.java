@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.paperbenni.mineglory.moba.item.BuildItems;
 import com.paperbenni.mineglory.moba.player.MobaPlayer;
 
 public class PlayerJoin implements Listener {
@@ -14,13 +15,14 @@ public class PlayerJoin implements Listener {
 		Player p = event.getPlayer();
 		p.sendMessage("Welcome to MineGlory");
 		Boolean team = false;
-		if(Math.round(Math.random()) == 1) {
+		if (Math.round(Math.random()) == 1) {
 			team = true;
 		} else {
 			team = false;
 		}
+		p.getInventory().clear();
+		BuildItems.giveWall(p);
 		MobaPlayer.addPlayer(p, team);
 
 	}
-	
 }

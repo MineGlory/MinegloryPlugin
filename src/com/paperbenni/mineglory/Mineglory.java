@@ -3,10 +3,11 @@ package com.paperbenni.mineglory;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.paperbenni.mineglory.event.player.DestroyBlock;
 import com.paperbenni.mineglory.event.player.PlayerHit;
 import com.paperbenni.mineglory.event.player.PlayerInteract;
 import com.paperbenni.mineglory.event.player.PlayerJoin;
-import com.paperbenni.mineglory.event.world.LoadEvent;
+import com.paperbenni.mineglory.event.player.PlayerLeave;
 
 public class Mineglory extends JavaPlugin{
 
@@ -25,7 +26,8 @@ public class Mineglory extends JavaPlugin{
 		pl.registerEvents(new PlayerJoin(), this);
 		pl.registerEvents(new PlayerInteract(), this);
 		pl.registerEvents(new PlayerHit(), this);
-		pl.registerEvents(new LoadEvent(this), this);
+		pl.registerEvents(new DestroyBlock(this), this);
+		pl.registerEvents(new PlayerLeave(), this);
 
 	}
 	

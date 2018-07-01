@@ -4,6 +4,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class MobaBeacon {
-	public static final Location OrangeBeacon = new Location(Bukkit.getWorld("World"), 100, 128, 0);
-	public static final Location BlueBeacon = new Location(Bukkit.getWorld("World"), -100, 128, 0);
+	private static final Location OrangeBeacon = new Location(Bukkit.getWorld("world"), 100.0, 128.0, 0.0);
+	private static final Location BlueBeacon = new Location(Bukkit.getWorld("world"), -100.0, 128.0, 0.0);
+
+	public static Location getOrageBeacon() {
+		return OrangeBeacon;
+	}
+
+	public static Location getBlueBeacon() {
+		return BlueBeacon;
+	}
+
 }

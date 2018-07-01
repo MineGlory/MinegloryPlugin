@@ -1,4 +1,3 @@
-name: MineGlorySmpResources
+name: MinegloryGameMode
 main: com.paperbenni.mineglory.Mineglory
-version: 1.0
-commands:
+version: 1.0 
