@@ -2,10 +2,14 @@ package com.paperbenni.mineglory.moba.player;
 
 import java.util.HashMap;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import com.paperbenni.mineglory.moba.item.BuildItems;
 import com.paperbenni.mineglory.moba.map.MobaBeacon;
 
 public class MobaPlayer {
@@ -50,21 +54,41 @@ public class MobaPlayer {
 			if (!(player.getWorld().getBlockAt(MobaBeacon.getOrageBeacon()).getType().equals(Material.EMERALD_BLOCK))) {
 				player.getWorld().getBlockAt(MobaBeacon.getOrageBeacon()).setType(Material.EMERALD_BLOCK);
 			}
-			this.player.teleport(MobaBeacon.getOrageBeacon().add(new Vector(0.5, 2, 0.5)));
-
+			Location PlayerLoc = MobaBeacon.getOrageBeacon().add(new Vector(0.5, 2.0, 0.5));
+			this.player.teleport(PlayerLoc);
 		} else {
 			if (!(player.getWorld().getBlockAt(MobaBeacon.getBlueBeacon()).getType().equals(Material.LAPIS_BLOCK))) {
 				player.getWorld().getBlockAt(MobaBeacon.getBlueBeacon()).setType(Material.LAPIS_BLOCK);
 			}
 			this.player.sendMessage("You joined the Blue team");
-			this.player.teleport(MobaBeacon.getBlueBeacon().add(new Vector(0.5, 2, 0.5)));
-
+			Location PlayerLoc = MobaBeacon.getBlueBeacon().add(new Vector(0.5, 2.0, 0.5));
+			this.player.teleport(PlayerLoc);
 		}
 
 	}
 
 	public Boolean getTeam() {
 		return this.team;
+	}
+
+	public Location getSpawn() {
+		if (this.team == ORANGE) {
+			return MobaBeacon.getOrageBeacon();
+		} else {
+			return MobaBeacon.getBlueBeacon();
+		}
+	}
+	
+	public void setup() {
+		Player p = this.player;
+		BuildItems.giveBridge(p);
+		BuildItems.givePlatform(p);
+		p.setFallDistance(10);
+		Inventory i = p.getInventory();
+		ItemStack sword = new ItemStack(Material.IRON_SWORD);
+		ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+		i.addItem(sword);
+		i.addItem(chestplate);
 	}
 
 	public static void sendMessage(Boolean team, String message) {

@@ -5,7 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.paperbenni.mineglory.moba.item.BuildItems;
 import com.paperbenni.mineglory.moba.player.MobaPlayer;
 
 public class PlayerJoin implements Listener {
@@ -21,9 +20,9 @@ public class PlayerJoin implements Listener {
 			team = false;
 		}
 		p.getInventory().clear();
-		BuildItems.giveBridge(p);
-		BuildItems.givePlatform(p);
 		MobaPlayer.addPlayer(p, team);
+		MobaPlayer.getMobaPlayer(p).setup();
+		
 
 	}
 }

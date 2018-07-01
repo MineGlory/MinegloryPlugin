@@ -4,6 +4,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.paperbenni.mineglory.event.player.DestroyBlock;
+import com.paperbenni.mineglory.event.player.FallDamage;
+import com.paperbenni.mineglory.event.player.PlayerDeath;
 import com.paperbenni.mineglory.event.player.PlayerHit;
 import com.paperbenni.mineglory.event.player.PlayerInteract;
 import com.paperbenni.mineglory.event.player.PlayerJoin;
@@ -30,6 +32,9 @@ public class Mineglory extends JavaPlugin{
 		pl.registerEvents(new DestroyBlock(this), this);
 		pl.registerEvents(new PlayerLeave(), this);
 		pl.registerEvents(new PlayerOnMove(), this);
+		pl.registerEvents(new PlayerDeath(this), this);
+		pl.registerEvents(new FallDamage(), this);
+
 
 
 	}
