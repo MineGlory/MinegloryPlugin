@@ -1,7 +1,9 @@
 package com.paperbenni.mineglory.moba.map;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 public class Directions {
 	final public static Integer PosX = 1;
@@ -9,31 +11,33 @@ public class Directions {
 	final public static Integer PosZ = 3;
 	final public static Integer NegZ = 4;
 
-	public static Integer getFacing(Player p, Location l) {
+	public static Vector getFacing(Player p, Location l) {
 
 		Location pl = p.getLocation();
-		double x1 = Math.abs(l.getX() - pl.getX());
-		double z1 = Math.abs(l.getZ() - pl.getZ());
-
-		double max = Math.max(x1, z1);
-		if (max == x1) {
-			double x2 = l.getX() - pl.getX();
-			if (x2 < 0) {
-				return NegX;
+		Integer x = 0;
+		Integer z = 0;
+			if (pl.getX() > l.getX()) {
+				x = -1;
 			} else {
-				return PosX;
+				x = 1;
 			}
+		if (pl.getZ() > l.getZ()) {
+			z = -1;
+		} else {
+			z = 1;
 		}
+		if (Math.abs(pl.getX() - l.getX()) > Math.abs(pl.getZ() - l.getZ())) {
+			z = 0;
+		} else {
+			x = 0;
+		}
+		return new Vector(x, 0, z);
 
-		if (max == z1) {
-			double z2 = l.getZ() - pl.getZ();
-			if (z2 < 0) {
-				return NegZ;
-			} else {
-				return PosZ;
-			}
-		}
-		return 0;
+	}
+	
+	public static Material getFloorBlock(Player p) {
+		Location below = p.getLocation().subtract(new Vector(0,1,0));
+		return below.getWorld().getBlockAt(below).getType();
 	}
 
 }

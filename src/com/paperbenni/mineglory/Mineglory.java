@@ -8,6 +8,7 @@ import com.paperbenni.mineglory.event.player.PlayerHit;
 import com.paperbenni.mineglory.event.player.PlayerInteract;
 import com.paperbenni.mineglory.event.player.PlayerJoin;
 import com.paperbenni.mineglory.event.player.PlayerLeave;
+import com.paperbenni.mineglory.event.player.PlayerOnMove;
 
 public class Mineglory extends JavaPlugin{
 
@@ -28,6 +29,8 @@ public class Mineglory extends JavaPlugin{
 		pl.registerEvents(new PlayerHit(), this);
 		pl.registerEvents(new DestroyBlock(this), this);
 		pl.registerEvents(new PlayerLeave(), this);
+		pl.registerEvents(new PlayerOnMove(), this);
+
 
 	}
 	

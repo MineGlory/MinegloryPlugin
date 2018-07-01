@@ -8,13 +8,23 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class BuildItems {
 
-	public static void giveWall(Player player) {
+	public static void giveBridge(Player player) {
+		giveCustomItem(player, "Bridge",(short) 1);
+	}
+	
+	public static void givePlatform(Player player) {
+		giveCustomItem(player, "Platform", (short) 2);
+	}
+	
+	
+	
+	public static void giveCustomItem(Player player, String name, short durability) {
 		ItemStack i = new ItemStack(Material.WOOD_SPADE);
-		i.setDurability((short) 1);
+		i.setDurability(durability);
 		ItemMeta meta = i.getItemMeta();
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName("Wall");
+		meta.setDisplayName(name);
 		i.setItemMeta(meta);
 		player.getInventory().addItem(i);
 	}

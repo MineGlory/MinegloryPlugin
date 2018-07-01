@@ -1,32 +1,26 @@
 package com.paperbenni.mineglory.moba.item;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import com.paperbenni.mineglory.moba.map.Directions;
 
 public class BuildEffects {
 
 	public static void WallEffect(Player p, Location loc) {
-		Integer d = Directions.getFacing(p, loc);
-		if (d == Directions.PosX) {
-			BuildBlocks.setPillow(loc.add(1, 0, 0), 5, "PosX");
-			p.sendMessage("PosX");
-			return;
+		Vector dir = Directions.getFacing(p, loc);
+		BuildBlocks.setPillow(loc, 10, dir);
+	}
 
-		}
-		if (d == Directions.NegX) {
-			BuildBlocks.setPillow(loc.add(-1, 0, 0), 5, "NegX");
-			p.sendMessage("NegX");//weiter
-		}
-		if (d == Directions.PosZ) {
-			BuildBlocks.setPillow(loc.add(0, 0, 1), 5, "PosZ");
-			p.sendMessage("PosZ");
+	public static void PlatformEffect(Player p) {
+
+		if (Directions.getFloorBlock(p).equals(Material.AIR)) {
+			BuildBlocks.setPlatform(p.getLocation().subtract(new Vector(3, 2, 2)), 5);
 		} else {
-			BuildBlocks.setPillow(loc.add(0, 0, -1), 5, "NegZ");
-			p.sendMessage("NegZ");
+			BuildBlocks.setPlatform(p.getLocation().subtract(new Vector(3, 1, 2)), 5);
 
 		}
-
 	}
 }

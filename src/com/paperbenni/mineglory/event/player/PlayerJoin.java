@@ -21,7 +21,8 @@ public class PlayerJoin implements Listener {
 			team = false;
 		}
 		p.getInventory().clear();
-		BuildItems.giveWall(p);
+		BuildItems.giveBridge(p);
+		BuildItems.givePlatform(p);
 		MobaPlayer.addPlayer(p, team);
 
 	}
