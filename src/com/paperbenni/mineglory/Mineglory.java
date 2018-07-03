@@ -26,7 +26,8 @@ public class Mineglory extends JavaPlugin{
 	
 	private void registerEvents() {
 		PluginManager pl = getServer().getPluginManager();
-		pl.registerEvents(new PlayerJoin(), this);
+
+		pl.registerEvents(new PlayerJoin(this), this);
 		pl.registerEvents(new PlayerInteract(), this);
 		pl.registerEvents(new PlayerHit(), this);
 		pl.registerEvents(new DestroyBlock(this), this);

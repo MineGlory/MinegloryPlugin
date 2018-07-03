@@ -1,5 +1,6 @@
 package com.paperbenni.mineglory.moba.player;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.bukkit.Location;
@@ -18,6 +19,23 @@ public class MobaPlayer {
 
 	private Boolean team = false;
 	private Player player;
+	private Integer Mana = 0;
+
+	public void addMana(Integer amount) {
+		this.Mana += amount;
+	}
+
+	public void takeMana(Integer amount) {
+		this.Mana -= amount;
+	}
+
+	public Integer getMana() {
+		return this.Mana;
+	}
+
+	public void setMana(Integer amount) {
+		this.Mana = amount;
+	}
 
 	private static HashMap<Player, MobaPlayer> registry = new HashMap<Player, MobaPlayer>();
 
@@ -41,6 +59,10 @@ public class MobaPlayer {
 
 	public static MobaPlayer getMobaPlayer(Player player) {
 		return registry.get(player);
+	}
+
+	public static Collection<MobaPlayer> getPlayers() {
+		return registry.values();
 	}
 
 	public static void removePlayer(Player player) {
@@ -78,17 +100,21 @@ public class MobaPlayer {
 			return MobaBeacon.getBlueBeacon();
 		}
 	}
-	
+
 	public void setup() {
 		Player p = this.player;
 		BuildItems.giveBridge(p);
 		BuildItems.givePlatform(p);
+		BuildItems.giveBooster(p);
+		BuildItems.giveStairs(p);
 		p.setFallDistance(10);
 		Inventory i = p.getInventory();
 		ItemStack sword = new ItemStack(Material.IRON_SWORD);
 		ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+		ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE);
 		i.addItem(sword);
 		i.addItem(chestplate);
+		i.addItem(pick);
 	}
 
 	public static void sendMessage(Boolean team, String message) {
@@ -101,4 +127,9 @@ public class MobaPlayer {
 			}
 		}
 	}
+
+	public void PlayerTick() {
+		this.addMana(1);
+	}
+
 }

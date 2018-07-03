@@ -1,5 +1,6 @@
 package com.paperbenni.mineglory.moba.item;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -16,7 +17,13 @@ public class BuildItems {
 		giveCustomItem(player, "Platform", (short) 2);
 	}
 	
+	public static void giveBooster(Player player) {
+		giveCustomItem(player, ChatColor.RED + "Booster", (short) 3);
+	}
 	
+	public static void giveStairs(Player player) {
+		giveCustomItem(player, ChatColor.BLUE + "Stairs", (short) 4);
+	}
 	
 	public static void giveCustomItem(Player player, String name, short durability) {
 		ItemStack i = new ItemStack(Material.WOOD_SPADE);
