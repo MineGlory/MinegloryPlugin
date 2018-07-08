@@ -21,6 +21,8 @@ public class MobaPlayer {
 	private Player player;
 	private Integer Mana = 0;
 
+	public static Boolean currentTeam = false;
+	
 	public void addMana(Integer amount) {
 		this.Mana += amount;
 	}
@@ -39,17 +41,16 @@ public class MobaPlayer {
 
 	private static HashMap<Player, MobaPlayer> registry = new HashMap<Player, MobaPlayer>();
 
-	public MobaPlayer(Boolean team, Player player) {
+	public MobaPlayer(Player player) {
 		this.setPlayer(player);
-		this.setTeam(team);
 	}
 
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
-	public static void addPlayer(Player player, Boolean team) {
-		MobaPlayer mo = new MobaPlayer(team, player);
+	public static void addPlayer(Player player) {
+		MobaPlayer mo = new MobaPlayer(player);
 		registry.put(player, mo);
 	}
 
@@ -73,17 +74,20 @@ public class MobaPlayer {
 		this.team = team;
 		if (team == ORANGE) {
 			this.player.sendMessage("You joined the Orange team");
-			if (!(player.getWorld().getBlockAt(MobaBeacon.getOrageBeacon()).getType().equals(Material.EMERALD_BLOCK))) {
-				player.getWorld().getBlockAt(MobaBeacon.getOrageBeacon()).setType(Material.EMERALD_BLOCK);
+			if (!(MobaBeacon.getOrageBeacon().getBlock().getType().equals(Material.EMERALD_BLOCK))) {
+				MobaBeacon.getOrageBeacon().getBlock().setType(Material.EMERALD_BLOCK);
+				MobaBeacon.getOrageBeacon().add(new Vector(1,0,0)).getBlock().setType(Material.IRON_BLOCK);
 			}
-			Location PlayerLoc = MobaBeacon.getOrageBeacon().add(new Vector(0.5, 2.0, 0.5));
+			Location PlayerLoc = MobaBeacon.getOrageBeacon().clone().add(new Vector(0.5, 2.0, 0.5));
 			this.player.teleport(PlayerLoc);
 		} else {
-			if (!(player.getWorld().getBlockAt(MobaBeacon.getBlueBeacon()).getType().equals(Material.LAPIS_BLOCK))) {
-				player.getWorld().getBlockAt(MobaBeacon.getBlueBeacon()).setType(Material.LAPIS_BLOCK);
+			if (!(MobaBeacon.getBlueBeacon().getBlock().getType().equals(Material.LAPIS_BLOCK))) {
+				MobaBeacon.getBlueBeacon().getBlock().setType(Material.LAPIS_BLOCK);
+				MobaBeacon.getBlueBeacon().subtract(new Vector(1,0,0)).getBlock().setType(Material.IRON_BLOCK);
+
 			}
 			this.player.sendMessage("You joined the Blue team");
-			Location PlayerLoc = MobaBeacon.getBlueBeacon().add(new Vector(0.5, 2.0, 0.5));
+			Location PlayerLoc = MobaBeacon.getBlueBeacon().clone().add(new Vector(0.5, 2.0, 0.5));
 			this.player.teleport(PlayerLoc);
 		}
 
@@ -115,6 +119,15 @@ public class MobaPlayer {
 		i.addItem(sword);
 		i.addItem(chestplate);
 		i.addItem(pick);
+		
+		this.setTeam(currentTeam);
+		
+		if(currentTeam == false) {
+			currentTeam = true;
+		} else {
+			currentTeam = true;
+		}
+		
 	}
 
 	public static void sendMessage(Boolean team, String message) {
@@ -131,5 +144,4 @@ public class MobaPlayer {
 	public void PlayerTick() {
 		this.addMana(1);
 	}
-
 }

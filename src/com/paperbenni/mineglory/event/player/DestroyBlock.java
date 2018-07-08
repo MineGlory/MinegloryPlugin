@@ -31,7 +31,6 @@ public class DestroyBlock implements Listener {
 
 		if (b.getType().equals(Material.EMERALD_BLOCK) || b.getType().equals(Material.LAPIS_BLOCK)) {
 			new BukkitRunnable() {
-
 				@Override
 				public void run() {
 					Bukkit.getServer().shutdown();

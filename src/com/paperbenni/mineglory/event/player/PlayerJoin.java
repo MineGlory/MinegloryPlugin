@@ -23,19 +23,15 @@ public class PlayerJoin implements Listener {
 	public PlayerJoin(Mineglory mineglory) {
 		this.mineglory = mineglory;
 	}
+	
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
 		p.sendMessage("Welcome to MineGlory");
-		Boolean team = false;
-		if (Math.round(Math.random()) == 1) {
-			team = true;
-		} else {
-			team = false;
-		}
+
 		p.getInventory().clear();
-		MobaPlayer.addPlayer(p, team);
+		MobaPlayer.addPlayer(p);
 		MobaPlayer mp = MobaPlayer.getMobaPlayer(p);
 		mp.setup();
 		ScoreboardManager m = Bukkit.getScoreboardManager();
